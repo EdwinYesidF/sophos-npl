@@ -9,7 +9,7 @@ import streamlit as st
 
 import config
 
-st.set_page_config(page_title=config.APP_TITLE, page_icon="🦉", layout="centered")
+st.set_page_config(page_title=config.APP_TITLE, page_icon=config.APP_ICON, layout="centered")
 
 # La clave de Groq se toma de los secretos de Streamlit (despliegue) o de la
 # variable de entorno GROQ_API_KEY (ejecución local). Nunca se escribe en el código.
@@ -44,7 +44,8 @@ if "session_id" not in st.session_state:
 
 # --- Barra lateral: orientación al usuario y configuración ---------------------
 with st.sidebar:
-    st.header("🦉 " + config.APP_TITLE)
+    st.image(config.APP_ICON, width=72)
+    st.header(config.APP_TITLE)
     st.caption(config.APP_SUBTITLE)
 
     st.subheader("¿Qué puedo hacer?")
@@ -90,7 +91,9 @@ with st.sidebar:
     )
 
 # --- Encabezado ----------------------------------------------------------------
-st.title("🦉 " + config.APP_TITLE)
+logo_col, title_col = st.columns([1, 7], vertical_alignment="center")
+logo_col.image(config.APP_ICON, width=72)
+title_col.title(config.APP_TITLE)
 st.caption(config.APP_SUBTITLE + " · Tutor de Procesamiento del Lenguaje Natural")
 
 
@@ -113,7 +116,7 @@ if not st.session_state.messages:
 
 # --- Historial ------------------------------------------------------------------
 for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar="🦉" if message["role"] == "assistant" else None):
+    with st.chat_message(message["role"], avatar=config.APP_ICON if message["role"] == "assistant" else None):
         st.markdown(message["content"])
         show_sources(message.get("sources"))
 
@@ -126,7 +129,7 @@ if question:
     with st.chat_message("user"):
         st.markdown(question)
 
-    with st.chat_message("assistant", avatar="🦉"):
+    with st.chat_message("assistant", avatar=config.APP_ICON):
         with st.spinner("Pensando…"):
             try:
                 result = backend.answer_question(

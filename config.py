@@ -8,6 +8,7 @@ Los secretos (clave de Groq) NO van aquí: se leen de variables de entorno.
 # --- Aplicación -------------------------------------------------------------
 APP_TITLE = "Sophos NLP"
 APP_SUBTITLE = "Your open-source NLP tutor"
+APP_ICON = "logo.png"    # imagen del logo (archivo en la raíz del repositorio)
 
 # --- LLM (modelo abierto, licencia Apache 2.0, servido por Groq) -------------
 LLM_MODEL = "qwen/qwen3.8-27b"
